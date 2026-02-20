@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>MCN Digital Studio - Desarrollo Web & Software a Medida</title>
+  <meta name="description" content="Sitios web y aplicaciones profesionales para empresas y profesionales de servicios. Desarrollo formal, moderno y orientado a resultados.">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-alt: #020617;
+      --card-bg: #020617;
+      --primary: #2563eb;
+      --primary-soft: rgba(37, 99, 235, 0.12);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --danger: #b91c1c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background:
+        radial-gradient(circle at 0% 0%, #0b1120 0, #020617 45%),
+        radial-gradient(circle at 100% 100%, #020617 0, #000 55%);
+      color: var(--text);
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(15, 23, 42, 0.92);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    header.header-scrolled {
+      border-bottom-color: rgba(31, 41, 55, 0.9);
+      background: rgba(15, 23, 42, 0.96);
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      row-gap: 0.6rem;
+      padding: 0.9rem 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      max-height: 56px;
+      margin-left: -14px;
+    }
+
+    .logo-image {
+      height: 180px;
+      width: auto;
+      display: block;
+    }
+
+    /* MENÚ PRINCIPAL */
+
+    nav ul {
+      list-style: none;
+    }
+
+    .nav-menu ul {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-menu a {
+      color: var(--muted);
+      transition: color 0.15s ease, transform 0.15s ease;
+    }
+
+    .nav-menu a:hover {
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .nav-link-active {
+      color: #e5e7eb;
+      position: relative;
+    }
+
+    .nav-link-active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -0.35rem;
+      margin: 0 auto;
+      width: 50%;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #60a5fa, #a855f7);
+    }
+
+    /* BOTÓN HAMBURGUESA (OCULTO EN DESKTOP) */
+    .nav-toggle {
+      display: none; /* solo se muestra en mobile */
+      background: none;
+      border: none;
+      color: #e5e7eb;
+      font-size: 1.4rem;
+      cursor: pointer;
+      padding: 0.2rem 0.6rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.9);
+    }
+
+    .btn-primary::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0% 50%, rgba(248, 250, 252, 0.4), transparent 60%);
+      opacity: 0;
+      transform: translateX(-40%);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-primary:hover::after {
+      opacity: 1;
+      transform: translateX(40%);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.95);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      border-color: rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.9);
+      padding-inline: 1.6rem;
+    }
+
+    header .btn-outline:hover {
+      background: #0f172a;
+      border-color: #e5e7eb;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.75);
+    }
+
+    .header-cta {
+      margin-left: auto;
+    }
+
+    /* HERO */
+
+    .hero {
+      position: relative;
+      padding: 4rem 0 3.2rem;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      max-width: 620px;
+      margin: 0 auto;
+      top: 8%;
+      border-radius: 999px;
+      background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.45), transparent 65%);
+      opacity: 0.65;
+      filter: blur(32px);
+      z-index: -1;
+      animation: heroGlow 8s ease-in-out infinite;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+      gap: 2.4rem;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: 999px;
+      padding: 0.25rem 0.9rem;
+      border: 1px solid rgba(59, 130, 246, 0.55);
+      background: rgba(15, 23, 42, 0.9);
+      color: #bfdbfe;
+      font-size: 0.75rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.3);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      letter-spacing: -0.03em;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 4vw, 3.4rem);
+      line-height: 1.06;
+      margin-bottom: 1.1rem;
+      letter-spacing: -0.045em;
+      color: #f9fafb;
+    }
+
+    .gradient-text {
+      background: linear-gradient(120deg, #60a5fa, #a855f7);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.02rem;
+      color: var(--muted);
+      max-width: 36rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-meta-badge {
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(59, 130, 246, 0.7);
+      font-size: 0.7rem;
+      color: #bfdbfe;
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 10%;
+      border-radius: 999px;
+      background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.45), transparent 60%);
+      filter: blur(18px);
+      opacity: 0.7;
+      z-index: -1;
+    }
+
+    .hero-mockup-simple {
+      max-width: 460px;
+      width: 100%;
+      border-radius: 1.4rem;
+      box-shadow:
+        0 22px 55px rgba(15, 23, 42, 0.95),
+        0 0 0 1px rgba(15, 23, 42, 1);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: #020617;
+    }
+
+    /* SECCIONES BASE */
+
+    section {
+      padding: 2.8rem 0;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.7rem;
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      letter-spacing: -0.03em;
+      color: #f9fafb;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 28rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .card,
+    .project,
+    .step,
+    .testimonial,
+    .about-card {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 1rem;
+      padding: 1rem 1.1rem 1.05rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .card:hover,
+    .project:hover,
+    .step:hover,
+    .testimonial:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.9);
+      border-color: rgba(59, 130, 246, 0.7);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.98), #020617);
+      backdrop-filter: blur(4px);
+    }
+
+    .card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 0.9rem;
+      background: var(--primary-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.7rem;
+      font-size: 1.1rem;
+      color: #bfdbfe;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+      color: #f9fafb;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .card ul {
+      list-style: none;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .card ul li::before {
+      content: "•";
+      color: #60a5fa;
+      margin-right: 0.35rem;
+    }
+
+    /* PORTFOLIO */
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+
+    .project-type {
+      font-size: 0.75rem;
+      color: #a5b4fc;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      margin-bottom: 0.3rem;
+    }
+
+    .project-title {
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+      color: #e5e7eb;
+    }
+
+    .project-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+
+    .tag {
+      padding: 0.12rem 0.45rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      font-size: 0.7rem;
+      color: #9ca3af;
+    }
+
+    /* PROCESO */
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .step-number {
+      display: inline-flex;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #e5e7eb;
+      margin-bottom: 0.4rem;
+      background: rgba(15, 23, 42, 0.96);
+    }
+
+    .step h3 {
+      font-size: 0.9rem;
+      color: #f9fafb;
+      margin-bottom: 0.25rem;
+    }
+
+    .step p {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* SOBRE MI */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.3fr);
+      gap: 2rem;
+    }
+
+    .about-text p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .stack-item {
+      padding: 0.28rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      font-size: 0.78rem;
+      color: #e5e7eb;
+    }
+
+    .about-card {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* TESTIMONIOS */
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .testimonial p {
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .testimonial strong {
+      color: #e5e7eb;
+      display: block;
+    }
+
+    .testimonial span {
+      color: #9ca3af;
+      font-size: 0.75rem;
+    }
+
+    /* GALERÍA MOCKUPS */
+/* SECCIÓN EJEMPLO DE DISEÑO */
+.design-showcase {
+  display: flex;
+  justify-content: center;
+}
+
+.design-card {
+  background: rgba(15, 23, 42, 0.96);
+  border-radius: 1rem;
+  padding: 0.9rem;
+  border: 1px solid rgba(31, 41, 55, 0.95);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.design-card img {
+  width: 100%;
+  border-radius: 0.8rem;
+  display: block;
+}
+
+.design-card figcaption {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+
+.mockup-grid {
+  display: flex;                    /* en vez de grid */
+  justify-content: center;          /* centra horizontalmente */
+  gap: 1.4rem;
+}
+
+.mockup-card {
+  background: rgba(15, 23, 42, 0.96);
+  border-radius: 1rem;
+  padding: 0.9rem;
+  border: 1px solid rgba(31, 41, 55, 0.95);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  max-width: 440px;                 /* ancho máx. para que no se vea gigante */
+  width: 100%;
+}
+
+.mockup-card img {
+  width: 100%;
+  border-radius: 0.8rem;
+  display: block;
+}
+
+.mockup-card figcaption {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+    /* CONTACTO */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    form {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    label {
+      font-size: 0.85rem;
+      color: #e5e7eb;
+      margin-bottom: 0.15rem;
+      display: block;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border-radius: 0.55rem;
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      background: rgba(15, 23, 42, 0.96);
+      color: #e5e7eb;
+      padding: 0.55rem 0.65rem;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.5);
+      background: rgba(15, 23, 42, 1);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .contact-meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .contact-highlights {
+      display: grid;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .contact-highlights span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* FAQ */
+
+    details summary {
+      list-style: none;
+    }
+
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details summary::after {
+      content: "+";
+      float: right;
+      font-weight: 600;
+      color: #6b7280;
+    }
+
+    details[open] summary::after {
+      content: "−";
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 1.6rem 0 1.8rem;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      font-size: 0.85rem;
+      color: #9ca3af;
+      background: #020617;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 0.9rem;
+    }
+
+    .footer-links a {
+      color: #9ca3af;
+      font-size: 0.85rem;
+    }
+
+    .footer-links a:hover {
+      color: #e5e7eb;
+    }
+
+    /* REVEAL */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* BOTÓN WHATSAPP FLOTANTE */
+
+    .whatsapp-float {
+      position: fixed;
+      right: 1.6rem;
+      bottom: 1.6rem;
+      z-index: 40;
+    }
+
+    .whatsapp-float a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3.4rem;
+      height: 3.4rem;
+      border-radius: 999px;
+      background: #22c55e;
+      color: #ffffff;
+      box-shadow: 0 12px 25px rgba(22, 163, 74, 0.65);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .whatsapp-float a:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 16px 32px rgba(22, 163, 74, 0.8);
+      background: #16a34a;
+    }
+
+    .whatsapp-icon-img {
+      width: 70%;
+      height: 70%;
+      object-fit: contain;
+    }
+
+    @keyframes heroGlow {
+      0% {
+        transform: translateY(0px) scale(1);
+        opacity: 0.65;
+      }
+      50% {
+        transform: translateY(-6px) scale(1.03);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(0px) scale(1);
+        opacity: 0.65;
+      }
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 960px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-visual {
+        margin-top: 1rem;
+      }
+
+      .hero-mockup-simple {
+        max-width: 380px;
+      }
+
+      .grid-3,
+      .projects,
+      .timeline,
+      .testimonials {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .mockup-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+   @media (max-width: 720px) {
+  .logo-image {
+    height: 50px !important;
+    width: auto !important;
+    margin-left: 0 !important;
+  }
+
+  .logo {
+    margin-left: 0 !important;
+    flex-shrink: 0;
+  }
+
+  /* HEADER / MENÚ MÓVIL */
+  .nav {
+    padding: 0.55rem 0;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: space-between;
+  }
+
+  
+
+  .nav-toggle {
+    display: block;      /* solo mobile */
+    flex-shrink: 0;
+  }
+
+  header .header-cta {
+    flex: 1;
+    max-width: 55%;      /* no dejar que el botón ocupe todo */
+    text-align: center;
+    padding: 0.22rem 0.8rem;
+    font-size: 0.76rem;
+  }
+
+  .header-cta.btn {
+    justify-content: center;
+  }
+
+  .nav-menu ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 0.75rem 1.5rem;
+    background: rgba(15, 23, 42, 0.98);
+    border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .nav-menu.open ul {
+    display: flex;
+  }
+
+  /* HERO MÁS COMPACTO */
+  .hero {
+    padding-top: 2.4rem;
+    padding-bottom: 2.4rem;
+  }
+
+  .hero h1 {
+    font-size: 2.1rem;
+    line-height: 1.1;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+  }
+
+  .pill {
+    font-size: 0.7rem;
+    padding: 0.18rem 0.7rem;
+  }
+
+  .hero-visual {
+    margin-top: 1.2rem;
+  }
+
+  .hero-mockup-simple {
+    max-width: 320px;
+  }
+
+  .grid-3,
+  .projects,
+  .timeline,
+  .testimonials,
+  .mockup-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .section-header {
+    flex-direction: column;
+  }
+
+  section {
+    padding: 2.1rem 0;
+  }
+
+  .card,
+  .project,
+  .step,
+  .testimonial,
+  .about-card {
+    padding: 0.85rem 0.9rem 0.9rem;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .whatsapp-float {
+    right: 1.1rem;
+    bottom: 1.1rem;
+  }
+
+  .whatsapp-float a {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">
+      <img src="/img/logo-mcn.png" alt="MCN Digital Studio" class="logo-image" />
+    </div>
+
+    <button class="nav-toggle" aria-label="Abrir menú de navegación">
+      ☰
+    </button>
+
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="#servicios" class="nav-link">Servicios</a></li>
+        <li><a href="#planes" class="nav-link">Planes</a></li>
+        <li><a href="#portfolio" class="nav-link">Proyectos</a></li>
+        <li><a href="#proceso" class="nav-link">Proceso</a></li>
+        <li><a href="#sobre-mi" class="nav-link">Sobre mí</a></li>
+        <li><a href="#contacto" class="nav-link">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <a href="#contacto" class="header-cta btn btn-outline">Solicitar presupuesto</a>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero reveal" id="inicio">
+    <div class="container hero-grid">
+      <div>
+        <div class="pill">
+          <span class="pill-dot"></span>
+          Acompañando a empresas y profesionales de servicios
+        </div>
+        <h1>
+          Sitios web y aplicaciones
+          <span class="gradient-text">profesionales</span>
+          para negocios que se toman en serio su presencia online.
+        </h1>
+        <p>
+          Diseño y desarrollo de soluciones digitales formales y claras para empresas y
+          profesionales de servicios. Comunicación directa, procesos ordenados y resultados
+          medibles.
+        </p>
+
+        <div th:if="${contactoExitoso}" style="margin-bottom:1rem; color:#4ade80; font-size:0.9rem;">
+          ¡Gracias por tu mensaje
+          <span th:text="${nombre} ?: ''"></span>! Te voy a responder a la brevedad.
+        </div>
+
+        <div class="hero-actions">
+          <a href="#contacto" class="btn btn-primary">
+            Reservar una llamada de 20 minutos
+          </a>
+          <a href="#portfolio" class="btn btn-outline">
+            Ver proyectos realizados
+          </a>
+        </div>
+        <div class="hero-meta">
+          <span>
+            <span class="hero-meta-badge">+2 años</span>
+            de experiencia en desarrollo web y software
+          </span>
+          <span>Enfoque en claridad, rendimiento y soporte cercano</span>
+        </div>
+      </div>
+
+      <aside class="hero-visual">
+        <img src="/img/mockup-web.png"
+             alt="Ejemplo de sitio web adaptado a computadora y celular"
+             class="hero-mockup-simple" />
+      </aside>
+    </div>
+  </section>
+
+  <!-- DATOS RÁPIDOS -->
+  <section class="reveal">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;">
+        <div class="card" style="text-align:left;">
+          <div style="font-size:0.8rem;color:#9ca3af;margin-bottom:0.25rem;">Proyectos lanzados</div>
+          <div style="font-size:1.4rem;font-weight:600;color:#f9fafb;">+20</div>
+          <p style="font-size:0.85rem;color:#9ca3af;margin-top:0.35rem;">
+            Sitios y aplicaciones para estudios, consultoras y negocios de servicios.
+          </p>
+        </div>
+        <div class="card" style="text-align:left;">
+          <div style="font-size:0.8rem;color:#9ca3af;margin-bottom:0.25rem;">Tiempo promedio</div>
+          <div style="font-size:1.4rem;font-weight:600;color:#f9fafb;">2–4 semanas</div>
+          <p style="font-size:0.85rem;color:#9ca3af;margin-top:0.35rem;">
+            Desde la primera reunión hasta el lanzamiento con todo funcionando.
+          </p>
+        </div>
+        <div class="card" style="text-align:left;">
+          <div style="font-size:0.8rem;color:#9ca3af;margin-bottom:0.25rem;">Stack principal</div>
+          <div style="font-size:1.4rem;font-weight:600;color:#f9fafb;">Java & Web</div>
+          <p style="font-size:0.85rem;color:#9ca3af;margin-top:0.35rem;">
+            Java / Spring Boot, React, APIs REST y bases de datos modernas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios" class="reveal">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Servicios</h2>
+        </div>
+        <p class="section-subtitle">
+          Desarrollo orientado a empresas y profesionales que buscan una presencia online
+          formal, clara y alineada con su marca.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">🌐</div>
+          <h3>Sitios institucionales</h3>
+          <p>
+            Sitios modernos y sobrios para estudios, consultoras, empresas de servicios
+            y profesionales que necesitan transmitir confianza.
+          </p>
+          <ul>
+            <li>Páginas claras para presentar servicios y equipo</li>
+            <li>Diseño responsive (mobile‑first)</li>
+            <li>Optimización de velocidad y SEO básico</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">⚙️</div>
+          <h3>Aplicaciones y sistemas</h3>
+          <p>
+            Plataformas y sistemas internos para automatizar procesos y mejorar la gestión
+            diaria de tu negocio.
+          </p>
+          <ul>
+            <li>Paneles de administración y dashboards</li>
+            <li>Sistemas de turnos, reservas, reportes, etc.</li>
+            <li>Integraciones con APIs y servicios externos</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🔄</div>
+          <h3>Mejoras y mantenimiento</h3>
+          <p>
+            Actualización y optimización de proyectos existentes, corrección de errores
+            y mejoras continuas.
+          </p>
+          <ul>
+            <li>Refactor de código y performance</li>
+            <li>Ajustes de UX/UI y conversiones</li>
+            <li>Soporte evolutivo con foco en estabilidad</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANES -->
+<section id="planes" class="reveal">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Planes de desarrollo web</h2>
+      <p class="section-subtitle">
+        Opciones pensadas para distintos momentos de tu negocio. Todos los planes
+        incluyen diseño personalizado, desarrollo profesional y soporte durante el lanzamiento.
+      </p>
+    </div>
+
+    <div class="grid-3">
+      <!-- PLAN INICIAL -->
+      <article class="card">
+        <div style="font-size:0.8rem;color:#a5b4fc;margin-bottom:0.4rem;">Plan inicial</div>
+        <h3>Landing profesional</h3>
+        <p>
+          Ideal para empresas y profesionales que necesitan una presencia online
+          clara para captar consultas.
+        </p>
+        <div style="margin:0.6rem 0 0.2rem;">
+          <span style="font-size:1.4rem;font-weight:600;">Desde $200.000</span>
+          <span style="font-size:0.8rem;color:#9ca3af;"> en efectivo / pago único</span>
+        </div>
+        <p style="font-size:0.8rem;color:#9ca3af;margin-bottom:0.6rem;">
+          Valor orientativo, puede ajustarse según el alcance del proyecto.
+        </p>
+        <ul>
+          <li>1 página (landing) orientada a conversión</li>
+          <li>Diseño responsive (móvil, tablet, desktop)</li>
+          <li>Formulario de contacto y enlaces a redes</li>
+          <li>Integración con WhatsApp o email</li>
+          <li>Entrega estimada: 1–2 semanas</li>
+        </ul>
+        <a href="#contacto" class="btn btn-outline" style="margin-top:1rem;width:100%;justify-content:center;">
+          Quiero este plan
+        </a>
+      </article>
+
+      <!-- PLAN NEGOCIO (DESTACADO) -->
+      <article class="card" style="border-color:#2563eb;box-shadow:0 22px 50px rgba(15,23,42,0.95);position:relative;">
+        <div style="position:absolute;top:1rem;right:1rem;font-size:0.7rem;color:#020617;background:#facc15;padding:0.15rem 0.55rem;border-radius:999px;font-weight:600;">
+          Más elegido
+        </div>
+        <div style="font-size:0.8rem;color:#a5b4fc;margin-bottom:0.4rem;">Plan negocio</div>
+        <h3>Sitio web completo</h3>
+        <p>
+          Para negocios que necesitan varias secciones, más contenido y una imagen
+          corporativa sólida.
+        </p>
+        <div style="margin:0.6rem 0 0.2rem;">
+          <span style="font-size:1.4rem;font-weight:600;">Desde $400.000</span>
+          <span style="font-size:0.8rem;color:#9ca3af;"> en efectivo / pago único</span>
+        </div>
+        <p style="font-size:0.8rem;color:#9ca3af;margin-bottom:0.6rem;">
+          Pensado para estudios, consultoras y negocios que ya están funcionando.
+        </p>
+        <ul>
+          <li>Hasta 5 secciones (inicio, servicios, equipo, casos, contacto…)</li>
+          <li>Textos y estructura pensados para vender</li>
+          <li>Blog / noticias opcional</li>
+          <li>Optimización SEO on‑page básica</li>
+          <li>Entrega estimada: 2–4 semanas</li>
+        </ul>
+        <a href="#contacto" class="btn btn-primary" style="margin-top:1rem;width:100%;justify-content:center;">
+          Consultar por este plan
+        </a>
+      </article>
+
+      <!-- PLAN AVANZADO -->
+      <article class="card">
+        <div style="font-size:0.8rem;color:#a5b4fc;margin-bottom:0.4rem;">Plan avanzado</div>
+        <h3>Web + sistema a medida</h3>
+        <p>
+          Para cuando además del sitio necesitás una aplicación o sistema interno
+          que acompañe el crecimiento de tu negocio.
+        </p>
+        <div style="margin:0.6rem 0 0.2rem;">
+          <span style="font-size:1.4rem;font-weight:600;">Desde $900.000</span>
+          <span style="font-size:0.8rem;color:#9ca3af;"> en efectivo / proyecto</span>
+        </div>
+        <p style="font-size:0.8rem;color:#9ca3af;margin-bottom:0.6rem;">
+          El valor final depende de la complejidad del sistema y las integraciones necesarias.
+        </p>
+        <ul>
+          <li>Web completa + aplicación o sistema interno</li>
+          <li>Flujos adaptados a tus procesos reales</li>
+          <li>Integraciones con APIs y herramientas existentes</li>
+          <li>Soporte técnico durante el lanzamiento</li>
+        </ul>
+        <a href="#contacto" class="btn btn-outline" style="margin-top:1rem;width:100%;justify-content:center;">
+          Agendar una llamada
+        </a>
+      </article>
+      
+    </div>
+<p style="font-size:0.9rem;color:#9ca3af;margin-top:1.4rem;text-align:center;">
+  ¿No estás seguro de qué plan se ajusta mejor a tu caso?
+</p>
+<div style="display:flex;justify-content:center;margin-top:0.5rem;">
+  <a href="#contacto" class="btn btn-primary">
+    Contame tu caso y vemos el plan juntos
+  </a>
+</div>
+
+  </div>
+</section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio" class="reveal">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Proyectos seleccionados</h2>
+        <p class="section-subtitle">
+          Algunos ejemplos de sitios y aplicaciones creados para empresas y profesionales
+          que necesitaban una presencia digital clara y confiable.
+        </p>
+      </div>
+
+      <div class="projects">
+        <article class="project">
+          <div class="project-type">Sitio institucional</div>
+          <h3 class="project-title">Estudio XYZ</h3>
+          <p class="project-desc">
+            Sitio institucional para un estudio profesional, con secciones para servicios,
+            equipo, noticias y contacto.
+          </p>
+          <div class="project-meta">
+            <div class="project-tags">
+              <span class="tag">Java / Spring Boot</span>
+              <span class="tag">Thymeleaf</span>
+            </div>
+            <span style="font-size:0.75rem;">Proyecto privado</span>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-type">Plataforma interna</div>
+          <h3 class="project-title">Gestor de turnos</h3>
+          <p class="project-desc">
+            Aplicación web para gestionar turnos de profesionales, con panel de administración,
+            recordatorios y reportes.
+          </p>
+          <div class="project-meta">
+            <div class="project-tags">
+              <span class="tag">Spring Boot</span>
+              <span class="tag">React</span>
+              <span class="tag">PostgreSQL</span>
+            </div>
+            <span style="font-size:0.75rem;">Uso interno</span>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-type">Landing de servicios</div>
+          <h3 class="project-title">Consultora ABC</h3>
+          <p class="project-desc">
+            Landing page enfocada en captación de leads para una consultora de servicios
+            empresariales.
+          </p>
+          <div class="project-meta">
+            <div class="project-tags">
+              <span class="tag">HTML/CSS</span>
+              <span class="tag">SEO básico</span>
+            </div>
+            <span style="font-size:0.75rem;">En producción</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- PROCESO -->
+  <section id="proceso" class="reveal">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Cómo trabajamos</h2>
+        <p class="section-subtitle">
+          Un proceso claro y transparente, para que sepas siempre en qué etapa está tu proyecto
+          y qué viene después.
+        </p>
+      </div>
+
+      <div class="timeline">
+        <div class="step">
+          <div class="step-number">01</div>
+          <h3>Reunión inicial</h3>
+          <p>
+            Conversamos sobre tu negocio, contexto y objetivos para entender qué tipo
+            de solución tiene más sentido.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-number">02</div>
+          <h3>Propuesta y alcance</h3>
+          <p>
+            Definimos funcionalidades, plazos y presupuesto en un documento claro
+            y fácil de revisar.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-number">03</div>
+          <h3>Diseño y desarrollo</h3>
+          <p>
+            Trabajamos sobre la estructura, diseño y código, con entregas parciales
+            para recibir tu feedback.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-number">04</div>
+          <h3>Lanzamiento y soporte</h3>
+          <p>
+            Publicamos el proyecto, lo conectamos con tus herramientas actuales y te
+            acompañamos en los primeros días de uso.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE MI -->
+  <section id="sobre-mi" class="reveal">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Sobre mí</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            Soy <strong>Nahuel Figueredo</strong>, desarrollador especializado en crear
+            soluciones digitales para empresas y profesionales que necesitan transmitir
+            seriedad y confianza.
+          </p>
+          <p>
+            Me gusta trabajar con procesos claros, explicando cada decisión técnica en un
+            lenguaje sencillo y manteniendo una comunicación constante durante todo el proyecto.
+          </p>
+          <p>
+            Mi objetivo es que tengas una herramienta que realmente puedas usar en tu día a día,
+            no solo “una web más”.
+          </p>
+          <div style="margin-top:0.7rem;margin-bottom:0.3rem;font-size:0.8rem;color:#d1d5db;">
+            Stack principal:
+          </div>
+          <div class="stack">
+            <span class="stack-item">Java / Spring Boot</span>
+            <span class="stack-item">JavaScript / TypeScript</span>
+            <span class="stack-item">React / Next.js</span>
+            <span class="stack-item">REST / APIs</span>
+            <span class="stack-item">PostgreSQL / MongoDB</span>
+            <span class="stack-item">HTML / CSS</span>
+          </div>
+        </div>
+
+        <aside class="about-card">
+          <p style="margin-bottom:0.6rem;">
+            <strong style="color:#f9fafb;">Lo que puedo aportar a tu proyecto</strong>
+          </p>
+          <ul style="list-style:none; padding-left:0; margin:0;">
+            <li style="margin-bottom:0.45rem;">
+              • Una visión que combina negocio, diseño y desarrollo.
+            </li>
+            <li style="margin-bottom:0.45rem;">
+              • Comunicación directa por correo, WhatsApp o reuniones online.
+            </li>
+            <li style="margin-bottom:0.45rem;">
+              • Código mantenible, pensado para seguir creciendo en el tiempo.
+            </li>
+            <li>
+              • Acompañamiento después del lanzamiento para seguir ajustando y mejorando.
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUÉ ELEGIRME -->
+  <section id="por-que" class="reveal">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">¿Por qué trabajar conmigo?</h2>
+        <p class="section-subtitle">
+          Más que una página bonita: cada proyecto se diseña pensando en cómo va a ayudarte
+          a conseguir más clientes y a simplificar tu día a día.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <div class="card-icon">🎯</div>
+          <h3>Enfoque en resultados</h3>
+          <p>
+            Definimos objetivos claros desde el inicio (consultas, ventas, imagen de marca)
+            y construimos la solución alrededor de eso.
+          </p>
+          <ul>
+            <li>Estructura pensada para guiar al usuario</li>
+            <li>CTAs claros y estratégicos</li>
+            <li>Métricas que se pueden medir y mejorar</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">🤝</div>
+          <h3>Acompañamiento cercano</h3>
+          <p>
+            Te explico cada decisión técnica en un lenguaje simple y te acompaño en cada etapa,
+            desde la idea hasta la publicación.
+          </p>
+          <ul>
+            <li>Comunicación por WhatsApp, email o videollamada</li>
+            <li>Entregas parciales con feedback</li>
+            <li>Soporte durante el lanzamiento</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">⚡</div>
+          <h3>Base técnica sólida</h3>
+          <p>
+            Uso tecnologías modernas y buenas prácticas para que tu proyecto sea rápido,
+            seguro y fácil de mantener.
+          </p>
+          <ul>
+            <li>Java / Spring Boot en el backend</li>
+            <li>Buenas prácticas de rendimiento y SEO</li>
+            <li>Código listo para seguir creciendo</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+ 
+    
+  </div>
+</section>
+
+  <!-- TESTIMONIOS -->
+  <section class="reveal">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Testimonios</h2>
+        <p class="section-subtitle">
+          Clientes con los que trabajé y que valoran procesos claros, entregas en tiempo y
+          enfoque en resultados.
+        </p>
+      </div>
+
+      <div class="testimonials">
+        <div class="testimonial">
+          <p>
+            “Nahuel entendió desde el primer momento lo que necesitábamos. La nueva página
+            aumentó claramente la cantidad de consultas que recibimos.”
+          </p>
+          <strong>Cliente 1</strong>
+          <span>Empresa de servicios</span>
+        </div>
+        <div class="testimonial">
+          <p>
+            “El sistema que desarrolló nos ahorró muchas horas de trabajo administrativo
+            cada semana. El proceso fue claro y cumplió los tiempos.”
+          </p>
+          <strong>Cliente 2</strong>
+          <span>Negocio profesional</span>
+        </div>
+        <div class="testimonial">
+          <p>
+            “Muy buena comunicación durante todo el proyecto y excelentes propuestas para mejorar
+            nuestra idea inicial.”
+          </p>
+          <strong>Cliente 3</strong>
+          <span>Estudio profesional</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="reveal">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Hablemos de tu proyecto</h2>
+        <p class="section-subtitle">
+          Contame en qué etapa estás y qué te gustaría construir o mejorar. Te respondo con una
+          propuesta clara de próximos pasos.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div>
+          <form th:action="@{/contacto}" method="post">
+            <div>
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre o el de tu empresa" required>
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+            </div>
+            <div>
+              <label for="mensaje">¿En qué te puedo ayudar?</label>
+              <textarea id="mensaje" name="mensaje" placeholder="Contame brevemente sobre tu proyecto, tiempos y objetivo principal." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top:0.4rem;">
+              Enviar mensaje
+            </button>
+          </form>
+        </div>
+
+        <aside>
+          <div class="contact-meta">
+            <p>
+              Si preferís una charla más directa, también podés escribirme por email o WhatsApp.
+            </p>
+          </div>
+          <div class="contact-highlights">
+            <span>📧 <strong style="color:#e5e7eb;">mcndigitalstudio@gmail.com</strong></span>
+            <span>💬 <strong style="color:#e5e7eb;">+54 9 221 5916893</strong> (WhatsApp)</span>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="reveal">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Preguntas frecuentes</h2>
+        <p class="section-subtitle">
+          Algunas de las dudas más comunes antes de empezar un proyecto. Si tenés otra
+          pregunta, escribime y la vemos juntos.
+        </p>
+      </div>
+
+      <div style="display:grid;gap:0.9rem;">
+        <details class="card" style="padding:0.9rem 1rem;">
+          <summary style="cursor:pointer;font-size:0.9rem;color:#f9fafb;">
+            ¿Cuánto tarda en estar lista mi página web?
+          </summary>
+          <p style="margin-top:0.5rem;font-size:0.85rem;color:#9ca3af;">
+            Depende del plan y del contenido disponible. Una landing simple suele estar lista
+            entre 1 y 2 semanas. Un sitio completo puede llevar entre 2 y 4 semanas.
+          </p>
+        </details>
+
+        <details class="card" style="padding:0.9rem 1rem;">
+          <summary style="cursor:pointer;font-size:0.9rem;color:#f9fafb;">
+            ¿Qué necesitás de mí para empezar?
+          </summary>
+          <p style="margin-top:0.5rem;font-size:0.85rem;color:#9ca3af;">
+            Una idea clara del objetivo de la web, información sobre tu negocio y, si tenés,
+            logo y material de marca. Si todavía no lo tenés, también puedo orientarte.
+          </p>
+        </details>
+
+        <details class="card" style="padding:0.9rem 1rem;">
+          <summary style="cursor:pointer;font-size:0.9rem;color:#f9fafb;">
+            ¿Podés mantener y actualizar mi sitio después de entregarlo?
+          </summary>
+          <p style="margin-top:0.5rem;font-size:0.85rem;color:#9ca3af;">
+            Sí. Podemos acordar un plan de mantenimiento mensual para aplicar mejoras,
+            hacer ajustes y mantener todo al día.
+          </p>
+        </details>
+
+        <details class="card" style="padding:0.9rem 1rem;">
+          <summary style="cursor:pointer;font-size:0.9rem;color:#f9fafb;">
+            ¿Incluye hosting y dominio?
+          </summary>
+          <p style="margin-top:0.5rem;font-size:0.85rem;color:#9ca3af;">
+            Te puedo asesorar en la elección y configuración de hosting y dominio. 
+            Los costos de esos servicios van por tu cuenta.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div style="display:flex;flex-direction:column;gap:0.35rem;">
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <img src="/img/logo-mcn.png"
+             alt="MCN Digital Studio"
+             style="height:54px;width:auto;" />
+        <span>© <span id="year"></span> MCN Digital Studio. Todos los derechos reservados.</span>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#planes">Planes</a>
+      <a href="#portfolio">Proyectos</a>
+      <a href="#faq">Preguntas frecuentes</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </div>
+</footer>
+
+<div class="whatsapp-float">
+  <a href="https://wa.me/5492215916893?text=Hola%20MCN,%20me%20gustaría%20hablar%20sobre%20un%20proyecto%20web."
+     target="_blank"
+     aria-label="Contactar por WhatsApp">
+    <img src="/img/whatsapp.png"
+         alt="WhatsApp"
+         class="whatsapp-icon-img" />
+  </a>
+</div>
+
+<script>
+  // Año footer
+  const yearEl = document.getElementById('year');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
+
+  // Animación reveal al hacer scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.18 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Resaltar sección activa en el menú
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  const highlightObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute("id");
+        navLinks.forEach(link => {
+          link.classList.toggle(
+            "nav-link-active",
+            link.getAttribute("href") === `#${id}`
+          );
+        });
+      }
+    });
+  }, { threshold: 0.35 });
+
+  sections.forEach(section => highlightObserver.observe(section));
+
+  // Header con borde al hacer scroll
+  const headerEl = document.querySelector("header");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 10) {
+      headerEl.classList.add("header-scrolled");
+    } else {
+      headerEl.classList.remove("header-scrolled");
+    }
+  });
+
+  // Scroll suave para links internos
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener("click", (e) => {
+    const targetId = link.getAttribute("href").slice(1);
+    const target = document.getElementById(targetId);
+    if (target) {
+      e.preventDefault();
+      window.scrollTo({
+        top: target.offsetTop - 80, // deja espacio para el header
+        behavior: "smooth",
+      });
+    }
+  });
+});
+
+  // Menú móvil
+  const navToggle = document.querySelector(".nav-toggle");
+  const navMenu = document.querySelector(".nav-menu");
+
+  if (navToggle && navMenu) {
+    navToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("open");
+    });
+
+    // Cerrar menú al hacer click en un link
+    navMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("open");
+      });
+    });
+  }
+</script>
+</body>
+</html>
