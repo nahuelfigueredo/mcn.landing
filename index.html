@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>MCN Digital Studio - Desarrollo Web & Software a Medida</title>
-  <meta name="description" content="Sitios web y aplicaciones profesionales para empresas y profesionales de servicios. Desarrollo formal, moderno y orientado a resultados.">
+  <title>MCN Digital Studio - Sitios web y aplicaciones a medida</title>
+  <meta name="description" content="Sitios web, aplicaciones web y aplicaciones a medida para empresas y profesionales de servicios. Desarrollo formal, moderno y orientado a resultados.">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Tipografías -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -134,7 +134,7 @@
 
     /* BOTÓN HAMBURGUESA (OCULTO EN DESKTOP) */
     .nav-toggle {
-      display: none; /* solo se muestra en mobile */
+      display: none;
       background: none;
       border: none;
       color: #e5e7eb;
@@ -577,68 +577,6 @@
       font-size: 0.75rem;
     }
 
-    /* GALERÍA MOCKUPS */
-/* SECCIÓN EJEMPLO DE DISEÑO */
-.design-showcase {
-  display: flex;
-  justify-content: center;
-}
-
-.design-card {
-  background: rgba(15, 23, 42, 0.96);
-  border-radius: 1rem;
-  padding: 0.9rem;
-  border: 1px solid rgba(31, 41, 55, 0.95);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-  max-width: 480px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-}
-
-.design-card img {
-  width: 100%;
-  border-radius: 0.8rem;
-  display: block;
-}
-
-.design-card figcaption {
-  font-size: 0.85rem;
-  color: #9ca3af;
-}
-
-
-.mockup-grid {
-  display: flex;                    /* en vez de grid */
-  justify-content: center;          /* centra horizontalmente */
-  gap: 1.4rem;
-}
-
-.mockup-card {
-  background: rgba(15, 23, 42, 0.96);
-  border-radius: 1rem;
-  padding: 0.9rem;
-  border: 1px solid rgba(31, 41, 55, 0.95);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-  max-width: 440px;                 /* ancho máx. para que no se vea gigante */
-  width: 100%;
-}
-
-.mockup-card img {
-  width: 100%;
-  border-radius: 0.8rem;
-  display: block;
-}
-
-.mockup-card figcaption {
-  font-size: 0.85rem;
-  color: #9ca3af;
-}
-
     /* CONTACTO */
 
     .contact-grid {
@@ -845,148 +783,139 @@
       .contact-grid {
         grid-template-columns: minmax(0, 1fr);
       }
-
-      .mockup-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
     }
 
-   @media (max-width: 720px) {
-  .logo-image {
-    height: 50px !important;
-    width: auto !important;
-    margin-left: 0 !important;
-  }
+    @media (max-width: 720px) {
+      .logo-image {
+        height: 50px !important;
+        width: auto !important;
+        margin-left: 0 !important;
+      }
 
-  .logo {
-    margin-left: 0 !important;
-    flex-shrink: 0;
-  }
+      .logo {
+        margin-left: 0 !important;
+        flex-shrink: 0;
+      }
 
-  /* HEADER / MENÚ MÓVIL */
-  .nav {
-    padding: 0.55rem 0;
-    align-items: center;
-    gap: 0.5rem;
-    justify-content: space-between;
-  }
+      .nav {
+        padding: 0.55rem 0;
+        align-items: center;
+        gap: 0.5rem;
+        justify-content: space-between;
+      }
 
-  
+      .nav-toggle {
+        display: block;
+        flex-shrink: 0;
+      }
 
-  .nav-toggle {
-    display: block;      /* solo mobile */
-    flex-shrink: 0;
-  }
+      header .header-cta {
+        flex: 1;
+        max-width: 55%;
+        text-align: center;
+        padding: 0.22rem 0.8rem;
+        font-size: 0.76rem;
+      }
 
-  header .header-cta {
-    flex: 1;
-    max-width: 55%;      /* no dejar que el botón ocupe todo */
-    text-align: center;
-    padding: 0.22rem 0.8rem;
-    font-size: 0.76rem;
-  }
+      .header-cta.btn {
+        justify-content: center;
+      }
 
-  .header-cta.btn {
-    justify-content: center;
-  }
+      .nav-menu ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 0.75rem 1.5rem;
+        background: rgba(15, 23, 42, 0.98);
+        border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+        flex-direction: column;
+        gap: 0.7rem;
+      }
 
-  .nav-menu ul {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    padding: 0.75rem 1.5rem;
-    background: rgba(15, 23, 42, 0.98);
-    border-bottom: 1px solid rgba(31, 41, 55, 0.9);
-    flex-direction: column;
-    gap: 0.7rem;
-  }
+      .nav-menu.open ul {
+        display: flex;
+      }
 
-  .nav-menu.open ul {
-    display: flex;
-  }
+      .hero {
+        padding-top: 2.4rem;
+        padding-bottom: 2.4rem;
+      }
 
-  /* HERO MÁS COMPACTO */
-  .hero {
-    padding-top: 2.4rem;
-    padding-bottom: 2.4rem;
-  }
+      .hero h1 {
+        font-size: 2.1rem;
+        line-height: 1.1;
+      }
 
-  .hero h1 {
-    font-size: 2.1rem;
-    line-height: 1.1;
-  }
+      .hero p {
+        font-size: 0.95rem;
+      }
 
-  .hero p {
-    font-size: 0.95rem;
-  }
+      .pill {
+        font-size: 0.7rem;
+        padding: 0.18rem 0.7rem;
+      }
 
-  .pill {
-    font-size: 0.7rem;
-    padding: 0.18rem 0.7rem;
-  }
+      .hero-visual {
+        margin-top: 1.2rem;
+      }
 
-  .hero-visual {
-    margin-top: 1.2rem;
-  }
+      .hero-mockup-simple {
+        max-width: 320px;
+      }
 
-  .hero-mockup-simple {
-    max-width: 320px;
-  }
+      .grid-3,
+      .projects,
+      .timeline,
+      .testimonials {
+        grid-template-columns: minmax(0, 1fr);
+      }
 
-  .grid-3,
-  .projects,
-  .timeline,
-  .testimonials,
-  .mockup-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
 
-  .hero-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
 
-  .btn {
-    width: 100%;
-    justify-content: center;
-  }
+      .section-header {
+        flex-direction: column;
+      }
 
-  .section-header {
-    flex-direction: column;
-  }
+      section {
+        padding: 2.1rem 0;
+      }
 
-  section {
-    padding: 2.1rem 0;
-  }
+      .card,
+      .project,
+      .step,
+      .testimonial,
+      .about-card {
+        padding: 0.85rem 0.9rem 0.9rem;
+      }
 
-  .card,
-  .project,
-  .step,
-  .testimonial,
-  .about-card {
-    padding: 0.85rem 0.9rem 0.9rem;
-  }
+      .section-title {
+        font-size: 1.2rem;
+      }
 
-  .section-title {
-    font-size: 1.2rem;
-  }
+      .section-subtitle {
+        font-size: 0.9rem;
+      }
 
-  .section-subtitle {
-    font-size: 0.9rem;
-  }
+      .whatsapp-float {
+        right: 1.1rem;
+        bottom: 1.1rem;
+      }
 
-  .whatsapp-float {
-    right: 1.1rem;
-    bottom: 1.1rem;
-  }
-
-  .whatsapp-float a {
-    width: 3rem;
-    height: 3rem;
-  }
-}
+      .whatsapp-float a {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1025,21 +954,16 @@
           <span class="pill-dot"></span>
           Acompañando a empresas y profesionales de servicios
         </div>
-        <h1>
-          Sitios web y aplicaciones
-          <span class="gradient-text">profesionales</span>
-          para negocios que se toman en serio su presencia online.
+             <h1>
+             Sitios web y aplicaciones
+          <span class="gradient-text">a medida</span>
+           para negocios que se toman en serio su presencia online.
         </h1>
         <p>
-          Diseño y desarrollo de soluciones digitales formales y claras para empresas y
-          profesionales de servicios. Comunicación directa, procesos ordenados y resultados
-          medibles.
+          Diseño y desarrollo de landing pages, sitios institucionales, aplicaciones web
+          y otras aplicaciones a medida para ordenar procesos, sumar consultas y mejorar
+          la experiencia de tus clientes.
         </p>
-
-        <div th:if="${contactoExitoso}" style="margin-bottom:1rem; color:#4ade80; font-size:0.9rem;">
-          ¡Gracias por tu mensaje
-          <span th:text="${nombre} ?: ''"></span>! Te voy a responder a la brevedad.
-        </div>
 
         <div class="hero-actions">
           <a href="#contacto" class="btn btn-primary">
@@ -1051,9 +975,8 @@
         </div>
         <div class="hero-meta">
           <span>
-            <span class="hero-meta-badge">+2 años</span>
-            de experiencia en desarrollo web y software
-          </span>
+           <span class="hero-meta-badge">+2 años</span>
+             de experiencia en sitios y aplicaciones
           <span>Enfoque en claridad, rendimiento y soporte cercano</span>
         </div>
       </div>
@@ -1103,8 +1026,8 @@
           <h2 class="section-title">Servicios</h2>
         </div>
         <p class="section-subtitle">
-          Desarrollo orientado a empresas y profesionales que buscan una presencia online
-          formal, clara y alineada con su marca.
+          Desarrollo de sitios web, aplicaciones web y otras aplicaciones orientado a empresas y profesionales
+          que buscan una presencia online formal, clara y alineada con su marca.
         </p>
       </div>
 
@@ -1125,15 +1048,15 @@
 
         <div class="card">
           <div class="card-icon">⚙️</div>
-          <h3>Aplicaciones y sistemas</h3>
+          <h3>Aplicaciones y sistemas a medida</h3>
           <p>
-            Plataformas y sistemas internos para automatizar procesos y mejorar la gestión
-            diaria de tu negocio.
-          </p>
-          <ul>
-            <li>Paneles de administración y dashboards</li>
-            <li>Sistemas de turnos, reservas, reportes, etc.</li>
-            <li>Integraciones con APIs y servicios externos</li>
+             Aplicaciones web y otras aplicaciones a medida para automatizar procesos,
+            centralizar información y adaptarse a cómo trabajás hoy.
+           </p>
+           <ul>
+          <li>Paneles de administración y dashboards</li>
+           <li>Sistemas de turnos, reservas, seguimiento y reportes</li>
+           <li>Integraciones con APIs, servicios externos y herramientas que ya usás</li>
           </ul>
         </div>
 
@@ -1155,112 +1078,111 @@
   </section>
 
   <!-- PLANES -->
-<section id="planes" class="reveal">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Planes de desarrollo web</h2>
-      <p class="section-subtitle">
-        Opciones pensadas para distintos momentos de tu negocio. Todos los planes
-        incluyen diseño personalizado, desarrollo profesional y soporte durante el lanzamiento.
+  <section id="planes" class="reveal">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Planes de desarrollo web y aplicaciones</h2>
+        <p class="section-subtitle">
+          Opciones pensadas para distintos momentos de tu negocio. Todos los planes
+          incluyen diseño personalizado, desarrollo profesional y soporte durante el lanzamiento.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <!-- PLAN INICIAL -->
+        <article class="card">
+          <div style="font-size:0.8rem;color:#a5b4fc;margin-bottom:0.4rem;">Plan inicial</div>
+          <h3>Landing profesional</h3>
+          <p>
+            Ideal para empresas y profesionales que necesitan una presencia online
+            clara para captar consultas.
+          </p>
+          <div style="margin:0.6rem 0 0.2rem;">
+            <span style="font-size:1.4rem;font-weight:600;">Desde $200.000</span>
+            <span style="font-size:0.8rem;color:#9ca3af;"> en efectivo / pago único</span>
+          </div>
+          <p style="font-size:0.8rem;color:#9ca3af;margin-bottom:0.6rem;">
+            Valor orientativo, puede ajustarse según el alcance del proyecto.
+          </p>
+          <ul>
+            <li>1 página (landing) orientada a conversión</li>
+            <li>Diseño responsive (móvil, tablet, desktop)</li>
+            <li>Formulario de contacto y enlaces a redes</li>
+            <li>Integración con WhatsApp o email</li>
+            <li>Entrega estimada: 1–2 semanas</li>
+          </ul>
+          <a href="#contacto" class="btn btn-outline" style="margin-top:1rem;width:100%;justify-content:center;">
+            Quiero este plan
+          </a>
+        </article>
+
+        <!-- PLAN NEGOCIO (DESTACADO) -->
+        <article class="card" style="border-color:#2563eb;box-shadow:0 22px 50px rgba(15,23,42,0.95);position:relative;">
+          <div style="position:absolute;top:1rem;right:1rem;font-size:0.7rem;color:#020617;background:#facc15;padding:0.15rem 0.55rem;border-radius:999px;font-weight:600;">
+            Más elegido
+          </div>
+          <div style="font-size:0.8rem;color:#a5b4fc;margin-bottom:0.4rem;">Plan negocio</div>
+          <h3>Sitio web completo</h3>
+          <p>
+            Para negocios que necesitan varias secciones, más contenido y una imagen
+            corporativa sólida.
+          </p>
+          <div style="margin:0.6rem 0 0.2rem;">
+            <span style="font-size:1.4rem;font-weight:600;">Desde $400.000</span>
+            <span style="font-size:0.8rem;color:#9ca3af;"> en efectivo / pago único</span>
+          </div>
+          <p style="font-size:0.8rem;color:#9ca3af;margin-bottom:0.6rem;">
+            Pensado para estudios, consultoras y negocios que ya están funcionando.
+          </p>
+          <ul>
+            <li>Hasta 5 secciones (inicio, servicios, equipo, casos, contacto…)</li>
+            <li>Textos y estructura pensados para vender</li>
+            <li>Blog / noticias opcional</li>
+            <li>Optimización SEO on‑page básica</li>
+            <li>Entrega estimada: 2–4 semanas</li>
+          </ul>
+          <a href="#contacto" class="btn btn-primary" style="margin-top:1rem;width:100%;justify-content:center;">
+            Consultar por este plan
+          </a>
+        </article>
+
+        <!-- PLAN AVANZADO -->
+        <article class="card">
+          <div style="font-size:0.8rem;color:#a5b4fc;margin-bottom:0.4rem;">Plan avanzado</div>
+          <h3>Web + aplicación o sistema a medida</h3>
+          <p>
+           Para cuando además del sitio necesitás una aplicación web u otra aplicación
+            a medida que acompañe el crecimiento de tu negocio.
+          </p>
+          <div style="margin:0.6rem 0 0.2rem;">
+            <span style="font-size:1.4rem;font-weight:600;">Desde $900.000</span>
+            <span style="font-size:0.8rem;color:#9ca3af;"> en efectivo / proyecto</span>
+          </div>
+          <p style="font-size:0.8rem;color:#9ca3af;margin-bottom:0.6rem;">
+            El valor final depende de la complejidad de la aplicación y las integraciones necesarias.
+          </p>
+          <ul>
+            <li>Sitio web completo + aplicación web o aplicación a medida</li>
+            <li>Flujos y pantallas adaptados a tus procesos reales</li>
+            <li>Integraciones con APIs y herramientas existentes</li>
+            <li>Soporte técnico durante el lanzamiento</li>
+          </ul>
+          <a href="#contacto" class="btn btn-outline" style="margin-top:1rem;width:100%;justify-content:center;">
+            Agendar una llamada
+          </a>
+        </article>
+      </div>
+
+      <p style="font-size:0.9rem;color:#9ca3af;margin-top:1.4rem;text-align:center;">
+        ¿No estás seguro de qué plan se ajusta mejor a tu caso?
       </p>
+      <div style="display:flex;justify-content:center;margin-top:0.5rem;">
+        <a href="#contacto" class="btn btn-primary">
+          Contame tu caso y vemos el plan juntos
+        </a>
+      </div>
     </div>
-
-    <div class="grid-3">
-      <!-- PLAN INICIAL -->
-      <article class="card">
-        <div style="font-size:0.8rem;color:#a5b4fc;margin-bottom:0.4rem;">Plan inicial</div>
-        <h3>Landing profesional</h3>
-        <p>
-          Ideal para empresas y profesionales que necesitan una presencia online
-          clara para captar consultas.
-        </p>
-        <div style="margin:0.6rem 0 0.2rem;">
-          <span style="font-size:1.4rem;font-weight:600;">Desde $200.000</span>
-          <span style="font-size:0.8rem;color:#9ca3af;"> en efectivo / pago único</span>
-        </div>
-        <p style="font-size:0.8rem;color:#9ca3af;margin-bottom:0.6rem;">
-          Valor orientativo, puede ajustarse según el alcance del proyecto.
-        </p>
-        <ul>
-          <li>1 página (landing) orientada a conversión</li>
-          <li>Diseño responsive (móvil, tablet, desktop)</li>
-          <li>Formulario de contacto y enlaces a redes</li>
-          <li>Integración con WhatsApp o email</li>
-          <li>Entrega estimada: 1–2 semanas</li>
-        </ul>
-        <a href="#contacto" class="btn btn-outline" style="margin-top:1rem;width:100%;justify-content:center;">
-          Quiero este plan
-        </a>
-      </article>
-
-      <!-- PLAN NEGOCIO (DESTACADO) -->
-      <article class="card" style="border-color:#2563eb;box-shadow:0 22px 50px rgba(15,23,42,0.95);position:relative;">
-        <div style="position:absolute;top:1rem;right:1rem;font-size:0.7rem;color:#020617;background:#facc15;padding:0.15rem 0.55rem;border-radius:999px;font-weight:600;">
-          Más elegido
-        </div>
-        <div style="font-size:0.8rem;color:#a5b4fc;margin-bottom:0.4rem;">Plan negocio</div>
-        <h3>Sitio web completo</h3>
-        <p>
-          Para negocios que necesitan varias secciones, más contenido y una imagen
-          corporativa sólida.
-        </p>
-        <div style="margin:0.6rem 0 0.2rem;">
-          <span style="font-size:1.4rem;font-weight:600;">Desde $400.000</span>
-          <span style="font-size:0.8rem;color:#9ca3af;"> en efectivo / pago único</span>
-        </div>
-        <p style="font-size:0.8rem;color:#9ca3af;margin-bottom:0.6rem;">
-          Pensado para estudios, consultoras y negocios que ya están funcionando.
-        </p>
-        <ul>
-          <li>Hasta 5 secciones (inicio, servicios, equipo, casos, contacto…)</li>
-          <li>Textos y estructura pensados para vender</li>
-          <li>Blog / noticias opcional</li>
-          <li>Optimización SEO on‑page básica</li>
-          <li>Entrega estimada: 2–4 semanas</li>
-        </ul>
-        <a href="#contacto" class="btn btn-primary" style="margin-top:1rem;width:100%;justify-content:center;">
-          Consultar por este plan
-        </a>
-      </article>
-
-      <!-- PLAN AVANZADO -->
-      <article class="card">
-        <div style="font-size:0.8rem;color:#a5b4fc;margin-bottom:0.4rem;">Plan avanzado</div>
-        <h3>Web + sistema a medida</h3>
-        <p>
-          Para cuando además del sitio necesitás una aplicación o sistema interno
-          que acompañe el crecimiento de tu negocio.
-        </p>
-        <div style="margin:0.6rem 0 0.2rem;">
-          <span style="font-size:1.4rem;font-weight:600;">Desde $900.000</span>
-          <span style="font-size:0.8rem;color:#9ca3af;"> en efectivo / proyecto</span>
-        </div>
-        <p style="font-size:0.8rem;color:#9ca3af;margin-bottom:0.6rem;">
-          El valor final depende de la complejidad del sistema y las integraciones necesarias.
-        </p>
-        <ul>
-          <li>Web completa + aplicación o sistema interno</li>
-          <li>Flujos adaptados a tus procesos reales</li>
-          <li>Integraciones con APIs y herramientas existentes</li>
-          <li>Soporte técnico durante el lanzamiento</li>
-        </ul>
-        <a href="#contacto" class="btn btn-outline" style="margin-top:1rem;width:100%;justify-content:center;">
-          Agendar una llamada
-        </a>
-      </article>
-      
-    </div>
-<p style="font-size:0.9rem;color:#9ca3af;margin-top:1.4rem;text-align:center;">
-  ¿No estás seguro de qué plan se ajusta mejor a tu caso?
-</p>
-<div style="display:flex;justify-content:center;margin-top:0.5rem;">
-  <a href="#contacto" class="btn btn-primary">
-    Contame tu caso y vemos el plan juntos
-  </a>
-</div>
-
-  </div>
-</section>
+  </section>
 
   <!-- PORTFOLIO -->
   <section id="portfolio" class="reveal">
@@ -1326,8 +1248,6 @@
     </div>
   </section>
 
-  
-
   <!-- PROCESO -->
   <section id="proceso" class="reveal">
     <div class="container">
@@ -1386,9 +1306,9 @@
       <div class="about-grid">
         <div class="about-text">
           <p>
-            Soy <strong>Nahuel Figueredo</strong>, desarrollador especializado en crear
-            soluciones digitales para empresas y profesionales que necesitan transmitir
-            seriedad y confianza.
+           Soy <strong>Nahuel Figueredo</strong>, desarrollador especializado en crear
+           sitios web, aplicaciones web y aplicaciones a medida para empresas y profesionales
+           que necesitan transmitir seriedad y confianza.
           </p>
           <p>
             Me gusta trabajar con procesos claros, explicando cada decisión técnica en un
@@ -1440,8 +1360,8 @@
       <div class="section-header">
         <h2 class="section-title">¿Por qué trabajar conmigo?</h2>
         <p class="section-subtitle">
-          Más que una página bonita: cada proyecto se diseña pensando en cómo va a ayudarte
-          a conseguir más clientes y a simplificar tu día a día.
+          Más que una página bonita: cada sitio y cada aplicación (web o a medida) se diseña
+          pensando en cómo va a ayudarte a conseguir más clientes y a simplificar tu día a día.
         </p>
       </div>
 
@@ -1490,11 +1410,6 @@
       </div>
     </div>
   </section>
-
- 
-    
-  </div>
-</section>
 
   <!-- TESTIMONIOS -->
   <section class="reveal">
@@ -1549,7 +1464,7 @@
 
       <div class="contact-grid">
         <div>
-          <form th:action="@{/contacto}" method="post">
+          <form action="#" method="post">
             <div>
               <label for="nombre">Nombre</label>
               <input type="text" id="nombre" name="nombre" placeholder="Tu nombre o el de tu empresa" required>
@@ -1566,6 +1481,10 @@
               Enviar mensaje
             </button>
           </form>
+          <p style="font-size:0.8rem;color:#9ca3af;margin-top:0.8rem;">
+            No es un compromiso de compra. Me contás tu idea, te doy una devolución honesta
+            y, si tiene sentido, avanzamos con una propuesta concreta.
+          </p>
         </div>
 
         <aside>
@@ -1630,7 +1549,7 @@
             ¿Incluye hosting y dominio?
           </summary>
           <p style="margin-top:0.5rem;font-size:0.85rem;color:#9ca3af;">
-            Te puedo asesorar en la elección y configuración de hosting y dominio. 
+            Te puedo asesorar en la elección y configuración de hosting y dominio.
             Los costos de esos servicios van por tu cuenta.
           </p>
         </details>
@@ -1719,19 +1638,19 @@
   });
 
   // Scroll suave para links internos
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener("click", (e) => {
-    const targetId = link.getAttribute("href").slice(1);
-    const target = document.getElementById(targetId);
-    if (target) {
-      e.preventDefault();
-      window.scrollTo({
-        top: target.offsetTop - 80, // deja espacio para el header
-        behavior: "smooth",
-      });
-    }
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener("click", (e) => {
+      const targetId = link.getAttribute("href").slice(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        e.preventDefault();
+        window.scrollTo({
+          top: target.offsetTop - 80,
+          behavior: "smooth",
+        });
+      }
+    });
   });
-});
 
   // Menú móvil
   const navToggle = document.querySelector(".nav-toggle");
@@ -1742,7 +1661,6 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
       navMenu.classList.toggle("open");
     });
 
-    // Cerrar menú al hacer click en un link
     navMenu.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
         navMenu.classList.remove("open");
